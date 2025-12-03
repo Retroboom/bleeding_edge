@@ -1070,6 +1070,12 @@
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
 
+        .nav-button.nav-separator {
+            margin-left: 12px;
+            border-left: 2px solid rgba(0, 255, 255, 0.3);
+            padding-left: 12px;
+        }
+
         @media (max-width: 768px) {
             .nav-menu {
                 padding: 8px 10px;
@@ -1089,18 +1095,18 @@
 <body>
     <!-- Sticky Navigation Menu -->
     <nav class="nav-menu" id="navMenu">
-        <div class="nav-menu-title">// NAVIGATION</div>
+        <div class="nav-menu-title">// NAV</div>
         <div class="nav-menu-buttons">
-            <button class="nav-button" onclick="scrollToSection('goal')">Goal & Objectives</button>
-            <button class="nav-button" onclick="scrollToSection('setup')">Game Setup</button>
-            <button class="nav-button" onclick="scrollToSection('turn')">Turn Structure</button>
-            <button class="nav-button" onclick="scrollToSection('deploy')">Deploying Cards</button>
-            <button class="nav-button" onclick="scrollToSection('cards')">Card Types</button>
-            <button class="nav-button" onclick="scrollToSection('plays')">Making Plays</button>
-            <button class="nav-button" onclick="scrollToSection('methods')">The Four Methods</button>
-            <button class="nav-button" onclick="scrollToSection('triggers')">Triggered Effects</button>
+            <button class="nav-button" onclick="scrollToSection('goal')">Goal</button>
+            <button class="nav-button" onclick="scrollToSection('setup')">Setup</button>
+            <button class="nav-button" onclick="scrollToSection('turn')">Turns</button>
+            <button class="nav-button nav-separator" onclick="scrollToSection('deploy')">Deploy</button>
+            <button class="nav-button" onclick="scrollToSection('cards')">Cards</button>
+            <button class="nav-button" onclick="scrollToSection('plays')">Plays</button>
+            <button class="nav-button" onclick="scrollToSection('methods')">Methods</button>
+            <button class="nav-button nav-separator" onclick="scrollToSection('triggers')">Triggers</button>
             <button class="nav-button" onclick="scrollToSection('keywords')">Keywords</button>
-            <button class="nav-button top-button" onclick="scrollToTop()">▲ BACK TO TOP</button>
+            <button class="nav-button top-button" onclick="scrollToTop()">▲ TOP</button>
         </div>
     </nav>
 
