@@ -994,17 +994,20 @@
         /* Sticky Navigation Menu */
         .nav-menu {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: rgba(5, 7, 20, 0.95);
-            border: 2px solid var(--terminal-cyan);
-            border-radius: 8px;
-            padding: 15px;
+            border-top: 2px solid var(--terminal-cyan);
+            padding: 12px 20px;
             z-index: 10000;
             opacity: 1;
             transition: opacity 0.5s ease;
-            max-width: 250px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 -5px 20px rgba(0, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .nav-menu.hidden {
@@ -1016,17 +1019,17 @@
             color: var(--terminal-cyan);
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-            text-align: center;
+            font-size: 0.75em;
             text-shadow: 0 0 5px var(--terminal-cyan);
-            border-bottom: 1px solid var(--terminal-cyan);
-            padding-bottom: 8px;
+            padding-right: 15px;
+            border-right: 1px solid var(--terminal-cyan);
+            white-space: nowrap;
         }
 
         .nav-menu-buttons {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
             gap: 8px;
         }
 
@@ -1036,18 +1039,18 @@
             color: var(--terminal-cyan);
             font-family: 'Rajdhani', sans-serif;
             font-weight: 500;
-            font-size: 0.85em;
-            padding: 8px 12px;
+            font-size: 0.75em;
+            padding: 6px 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: left;
             border-radius: 4px;
             text-shadow: 0 0 3px var(--terminal-cyan);
+            white-space: nowrap;
         }
 
         .nav-button:hover {
             background: rgba(0, 255, 255, 0.25);
-            transform: translateX(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
@@ -1057,14 +1060,29 @@
             color: var(--terminal-green);
             text-shadow: 0 0 3px var(--terminal-green);
             font-weight: 700;
-            margin-top: 5px;
-            border-top: 1px solid var(--terminal-green);
-            padding-top: 8px;
+            margin-left: 8px;
+            border-left: 2px solid var(--terminal-green);
+            padding-left: 12px;
         }
 
         .nav-button.top-button:hover {
             background: rgba(0, 255, 65, 0.25);
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                padding: 8px 10px;
+                gap: 8px;
+            }
+            .nav-menu-title {
+                font-size: 0.65em;
+                padding-right: 8px;
+            }
+            .nav-button {
+                font-size: 0.65em;
+                padding: 4px 8px;
+            }
         }
     </style>
 </head>
