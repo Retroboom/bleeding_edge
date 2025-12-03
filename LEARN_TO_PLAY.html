@@ -836,15 +836,18 @@
 
         /* ASCII Art containers */
         .ascii-art {
-            font-size: 0.7em;
+            font-size: 0.9em;
             line-height: 1.2;
             color: var(--terminal-green);
             background: rgba(0, 0, 0, 0.5);
             padding: 15px;
             overflow-x: auto;
+            overflow-y: hidden;
             border: 1px solid var(--terminal-green);
             white-space: pre;
             position: relative;
+            display: block;
+            font-family: monospace;
         }
 
         /* Phase indicators */
@@ -990,6 +993,9 @@
             }
             .comparison {
                 flex-direction: column;
+            }
+            .ascii-art {
+                font-size: 0.5em;
             }
         }
 
@@ -1711,14 +1717,12 @@
                     </div>
                 </div>
 
-                <div class="ascii-art">
-TURN 1: [Target]           → Intrusion succeeds → [Target 🚪]
-TURN 3: [Target 🚪]        → Intrusion succeeds → BACKDOOR ABILITY TRIGGERS!
+                <div class="ascii-art">TURN 1: [Target] → Intrusion wins → [Target 🚪]
+TURN 3: [Target 🚪] → Any Play wins → BACKDOOR TRIGGERS!
         "Backdoor // Draw 3 cards and Disrupt target"
 
 IMPORTANT: Backdoor marker removes ALL targeting restrictions!
-[Target 🚪] can now be targeted by Violence, Influence, Override, AND Intrusion
-                </div>
+[Target 🚪] can be targeted by ALL Methods</div>
 
                 <div class="alert alert-info">
                     <strong>This is the #1 rule beginners forget!</strong> Intrusion is the universal Method. It can target ANYTHING—committed, uncommitted, Protected, or Cached cards.
@@ -1977,13 +1981,11 @@ IMPORTANT: Backdoor marker removes ALL targeting restrictions!
                     </div>
                 </div>
 
-                <div class="ascii-art">
-    ╔═══════════════════════════════════════════════╗
-    ║                                               ║
-    ║         [ PRESS START TO BEGIN GAME ]         ║
-    ║                                               ║
-    ╚═══════════════════════════════════════════════╝
-                </div>
+                <div class="ascii-art">+=========================================+
+|                                         |
+|      [ PRESS START TO BEGIN GAME ]      |
+|                                         |
++=========================================+</div>
             </div>
         </div>
 
