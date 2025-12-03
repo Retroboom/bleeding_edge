@@ -990,9 +990,102 @@
                 flex-direction: column;
             }
         }
+
+        /* Sticky Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(5, 7, 20, 0.95);
+            border: 2px solid var(--terminal-cyan);
+            border-radius: 8px;
+            padding: 15px;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            max-width: 250px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .nav-menu.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .nav-menu-title {
+            color: var(--terminal-cyan);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 0 0 5px var(--terminal-cyan);
+            border-bottom: 1px solid var(--terminal-cyan);
+            padding-bottom: 8px;
+        }
+
+        .nav-menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-button {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--terminal-cyan);
+            color: var(--terminal-cyan);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            font-size: 0.85em;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            border-radius: 4px;
+            text-shadow: 0 0 3px var(--terminal-cyan);
+        }
+
+        .nav-button:hover {
+            background: rgba(0, 255, 255, 0.25);
+            transform: translateX(-3px);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .nav-button.top-button {
+            background: rgba(0, 255, 65, 0.1);
+            border-color: var(--terminal-green);
+            color: var(--terminal-green);
+            text-shadow: 0 0 3px var(--terminal-green);
+            font-weight: 700;
+            margin-top: 5px;
+            border-top: 1px solid var(--terminal-green);
+            padding-top: 8px;
+        }
+
+        .nav-button.top-button:hover {
+            background: rgba(0, 255, 65, 0.25);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
     </style>
 </head>
 <body>
+    <!-- Sticky Navigation Menu -->
+    <nav class="nav-menu" id="navMenu">
+        <div class="nav-menu-title">// NAVIGATION</div>
+        <div class="nav-menu-buttons">
+            <button class="nav-button" onclick="scrollToSection('goal')">Goal & Objectives</button>
+            <button class="nav-button" onclick="scrollToSection('setup')">Game Setup</button>
+            <button class="nav-button" onclick="scrollToSection('turn')">Turn Structure</button>
+            <button class="nav-button" onclick="scrollToSection('deploy')">Deploying Cards</button>
+            <button class="nav-button" onclick="scrollToSection('cards')">Card Types</button>
+            <button class="nav-button" onclick="scrollToSection('plays')">Making Plays</button>
+            <button class="nav-button" onclick="scrollToSection('methods')">The Four Methods</button>
+            <button class="nav-button" onclick="scrollToSection('triggers')">Triggered Effects</button>
+            <button class="nav-button" onclick="scrollToSection('keywords')">Keywords</button>
+            <button class="nav-button top-button" onclick="scrollToTop()">▲ BACK TO TOP</button>
+        </div>
+    </nav>
+
     <div class="container">
         <!-- Header -->
         <div class="header">
@@ -1028,7 +1121,7 @@
         </div>
 
         <!-- Objectives -->
-        <h2>YOUR GOAL: 12 OBJECTIVE POINTS</h2>
+        <h2 id="goal">YOUR GOAL: 12 OBJECTIVE POINTS</h2>
         <div class="terminal-window">
             <div class="terminal-header">
                 <span class="terminal-title">objectives.db</span>
@@ -1085,7 +1178,7 @@
         </div>
 
         <!-- Setup -->
-        <h2>GAME SETUP</h2>
+        <h2 id="setup">GAME SETUP</h2>
         <div class="terminal-window">
             <div class="terminal-header">
                 <span class="terminal-title">setup.exe</span>
@@ -1111,7 +1204,7 @@
         </div>
 
         <!-- Turn Structure -->
-        <h2>YOUR TURN: THREE PHASES</h2>
+        <h2 id="turn">YOUR TURN: THREE PHASES</h2>
         <div class="terminal-window">
             <div class="terminal-header">
                 <span class="terminal-title">turn_sequence.exe</span>
@@ -1157,7 +1250,7 @@
         </div>
 
         <!-- Deployment -->
-        <h2>DEPLOYING CARDS</h2>
+        <h2 id="deploy">DEPLOYING CARDS</h2>
         <div class="terminal-window">
             <div class="terminal-header">
                 <span class="terminal-title">deploy.sys</span>
@@ -1229,7 +1322,7 @@
         </div>
 
         <!-- Card Types -->
-        <h2>CARD TYPES</h2>
+        <h2 id="cards">CARD TYPES</h2>
 
         <h3>Agents</h3>
         <p>Your operatives. They have stats in the four Methods and can make Plays or block.</p>
@@ -1304,7 +1397,7 @@
         </div>
 
         <!-- Making Plays -->
-        <h2>MAKING PLAYS: THE CORE OF COMBAT</h2>
+        <h2 id="plays">MAKING PLAYS: THE CORE OF COMBAT</h2>
         <div class="terminal-window">
             <div class="terminal-header">
                 <span class="terminal-title">make_play.exe</span>
@@ -1376,7 +1469,7 @@
         </div>
 
         <!-- The Four Methods -->
-        <h2>THE FOUR METHODS</h2>
+        <h2 id="methods">THE FOUR METHODS</h2>
 
         <h3>⚔ Violence Play</h3>
         <p><em>All-or-nothing destruction</em></p>
@@ -1602,7 +1695,7 @@ IMPORTANT: Backdoor marker removes ALL targeting restrictions!
         </div>
 
         <!-- Triggered Effects -->
-        <h2>TRIGGERED EFFECTS</h2>
+        <h2 id="triggers">TRIGGERED EFFECTS</h2>
         <table class="data-table">
             <thead>
                 <tr>
@@ -1640,7 +1733,7 @@ IMPORTANT: Backdoor marker removes ALL targeting restrictions!
         </div>
 
         <!-- Keywords -->
-        <h2>KEYWORDS</h2>
+        <h2 id="keywords">KEYWORDS</h2>
         <div class="terminal-window">
             <div class="terminal-header">
                 <span class="terminal-title">keywords.db</span>
@@ -1829,5 +1922,55 @@ IMPORTANT: Backdoor marker removes ALL targeting restrictions!
             </div>
         </div>
     </div>
+
+    <script>
+        // Navigation menu auto-hide functionality
+        let hideTimeout;
+        const navMenu = document.getElementById('navMenu');
+
+        // Show menu on any user interaction
+        function showMenu() {
+            navMenu.classList.remove('hidden');
+            resetHideTimer();
+        }
+
+        // Reset the hide timer
+        function resetHideTimer() {
+            clearTimeout(hideTimeout);
+            hideTimeout = setTimeout(() => {
+                navMenu.classList.add('hidden');
+            }, 2000); // Hide after 2 seconds of inactivity
+        }
+
+        // Scroll to section with smooth behavior
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            showMenu();
+        }
+
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            showMenu();
+        }
+
+        // Event listeners for user interaction
+        document.addEventListener('mousemove', showMenu);
+        document.addEventListener('touchstart', showMenu);
+        document.addEventListener('scroll', showMenu);
+
+        // Keep menu visible when hovering over it
+        navMenu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+        });
+
+        navMenu.addEventListener('mouseleave', resetHideTimer);
+
+        // Initial timer
+        resetHideTimer();
+    </script>
 </body>
 </html>
