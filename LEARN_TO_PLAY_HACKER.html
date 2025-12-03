@@ -1078,16 +1078,42 @@
 
         @media (max-width: 768px) {
             .nav-menu {
-                padding: 8px 10px;
-                gap: 8px;
+                padding: 6px 8px;
+                gap: 5px;
             }
             .nav-menu-title {
-                font-size: 0.65em;
-                padding-right: 8px;
+                font-size: 0.6em;
+                padding-right: 6px;
             }
             .nav-button {
-                font-size: 0.65em;
-                padding: 4px 8px;
+                font-size: 0.6em;
+                padding: 4px 6px;
+            }
+            .nav-button.nav-separator {
+                margin-left: 0;
+                border-left: none;
+                padding-left: 6px;
+            }
+            .nav-button.top-button {
+                margin-left: 0;
+                border-left: none;
+                padding-left: 6px;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 400px) {
+            .nav-menu {
+                padding: 4px 6px;
+                gap: 3px;
+            }
+            .nav-menu-title {
+                font-size: 0.55em;
+                padding-right: 5px;
+            }
+            .nav-button {
+                font-size: 0.55em;
+                padding: 3px 5px;
             }
         }
     </style>
