@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLEEDING EDGE // LEARN_TO_PLAY.exe</title>
+    <title>BLEEDING EDGE // LEARN_TO_PLAY.exe [DECK-OUT VERSION]</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
 
@@ -1142,6 +1142,54 @@
                 font-size: 0.75em;
             }
         }
+
+        /* Pairing visualizer */
+        .pairing-visualizer {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--terminal-purple);
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .pairing-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .pair-token {
+            display: inline-block;
+            padding: 8px 12px;
+            border: 2px solid;
+            border-radius: 4px;
+            font-weight: bold;
+            min-width: 40px;
+        }
+
+        .token-capital {
+            border-color: var(--terminal-yellow);
+            color: var(--terminal-yellow);
+            background: rgba(255, 237, 78, 0.1);
+        }
+
+        .token-devotion {
+            border-color: var(--terminal-purple);
+            color: var(--terminal-purple);
+            background: rgba(189, 0, 255, 0.1);
+        }
+
+        .token-paired {
+            border: 2px dashed var(--terminal-cyan);
+            padding: 10px 15px;
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .token-unpaired {
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
@@ -1158,8 +1206,8 @@
             <button class="nav-button" onclick="scrollToSection('plays')">Plays</button>
             <button class="nav-button" onclick="scrollToSection('methods')">Methods</button>
             <span class="nav-pipe">|</span>
-            <button class="nav-button" onclick="scrollToSection('triggers')">Triggers</button>
-            <button class="nav-button" onclick="scrollToSection('keywords')">Keywords</button>
+            <button class="nav-button" onclick="scrollToSection('purge')">Purge</button>
+            <button class="nav-button" onclick="scrollToSection('exhaustion')">Deck Exhaustion</button>
             <span class="nav-pipe">|</span>
             <button class="nav-button top-button" onclick="scrollToTop()">▲ TOP</button>
         </div>
@@ -1169,12 +1217,12 @@
         <!-- Header -->
         <div class="header">
             <div class="glitch">BLEEDING EDGE</div>
-            <div class="subtitle">NEURAL_INTERFACE_TUTORIAL.exe</div>
+            <div class="subtitle">NEURAL_INTERFACE_TUTORIAL.exe [DECK-OUT VERSION]</div>
             <div class="boot-sequence">
                 > INITIALIZING COMBAT PROTOCOLS<span class="loading"></span><br>
                 > LOADING FACTION DATABASE... [OK]<br>
                 > ESTABLISHING NEURAL LINK... [OK]<br>
-                > ACCESS GRANTED // CYBERPUNK TACTICAL SYSTEM v2.0
+                > ACCESS GRANTED // CYBERPUNK TACTICAL SYSTEM v3.0
             </div>
         </div>
 
@@ -1189,8 +1237,8 @@
                 </div>
             </div>
             <div class="terminal-body">
-                <p>In <strong>Bleeding Edge</strong>, you control a faction fighting for dominance in a neon-drenched cyberpunk future. You'll deploy Agents, build Assets, and make strategic Plays to score Objective points.</p>
-                <p><strong>To win:</strong> Be the first player to reach <span style="color: var(--terminal-yellow); text-shadow: 0 0 5px var(--terminal-yellow);">12 points</span>.</p>
+                <p>In <strong>Bleeding Edge</strong>, you control a faction fighting for dominance in a neon-drenched cyberpunk future. You'll deploy Agents, build Assets, and make strategic Plays to generate Objective points.</p>
+                <p><strong>To win:</strong> Deplete your opponent's deck to <span style="color: var(--terminal-red); text-shadow: 0 0 5px var(--terminal-red);">0 total cards</span> through the <strong>Purge System</strong>.</p>
                 <p>This guide teaches you everything you need to play your first game.</p>
             </div>
         </div>
@@ -1200,7 +1248,7 @@
         </div>
 
         <!-- Objectives -->
-        <h2 id="goal">YOUR GOAL: 12 OBJECTIVE POINTS</h2>
+        <h2 id="goal">YOUR GOAL: PURGE OPPONENT TO ZERO</h2>
         <div class="terminal-window">
             <div class="terminal-header">
                 <span class="terminal-title">objectives.db</span>
@@ -1244,11 +1292,127 @@
                     </tbody>
                 </table>
 
-                <div class="alert alert-warning">
-                    <strong>Important:</strong> You can only score 1 point per Objective per turn. Having multiple generators gives you reliability, not speed.
+                <div class="alert alert-danger">
+                    <strong>VICTORY CONDITION:</strong> Generate objective points to PURGE your opponent's deck! The more balanced your objectives, the faster you win. Your opponent loses when they have 0 cards in deck + trash combined.
                 </div>
 
-                <p>Your faction card tells you which two you can score. You can mix points freely—for example: <span style="color: var(--terminal-yellow);">7 Capital + 5 Devotion = 12 = Victory!</span></p>
+                <p>Your faction card tells you which two objectives you can score.</p>
+            </div>
+        </div>
+
+        <div class="hacker-divider">
+            >>> PURGE SYSTEM ONLINE... OBJECTIVE PAIRING PROTOCOL LOADED <<<
+        </div>
+
+        <!-- Objective Pairing System -->
+        <h2 id="purge">THE PURGE SYSTEM: HOW YOU WIN</h2>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">objective_pairing.exe</span>
+                <div class="terminal-buttons">
+                    <div class="terminal-btn btn-close"></div>
+                    <div class="terminal-btn btn-min"></div>
+                    <div class="terminal-btn btn-max"></div>
+                </div>
+            </div>
+            <div class="terminal-body">
+                <h3>Objective Pairing Formula</h3>
+                <p><strong>At the end of your turn, if you generated objective points:</strong></p>
+
+                <div class="code-block">
+                    <div class="code-line">1. Count Primary Objective points generated</div>
+                    <div class="code-line">2. Count Secondary Objective points generated</div>
+                    <div class="code-line">3. Form PAIRS: MIN(Primary, Secondary)</div>
+                    <div class="code-line">4. Calculate: (Pairs × 3) + (Unpaired × 1)</div>
+                    <div class="code-line">5. Opponent purges that many cards</div>
+                </div>
+
+                <h3>Visual Example: 5 Capital + 3 Devotion</h3>
+                <div class="pairing-visualizer">
+                    <div class="pairing-row">
+                        <strong style="color: var(--terminal-yellow);">CAPITAL:</strong>
+                        <span class="pair-token token-capital">💰</span>
+                        <span class="pair-token token-capital">💰</span>
+                        <span class="pair-token token-capital">💰</span>
+                        <span class="pair-token token-capital">💰</span>
+                        <span class="pair-token token-capital">💰</span>
+                    </div>
+                    <div class="pairing-row">
+                        <strong style="color: var(--terminal-purple);">DEVOTION:</strong>
+                        <span class="pair-token token-devotion">🙏</span>
+                        <span class="pair-token token-devotion">🙏</span>
+                        <span class="pair-token token-devotion">🙏</span>
+                    </div>
+                    <div style="margin: 20px 0; font-size: 1.2em; color: var(--terminal-cyan);">↓ PAIR THEM UP ↓</div>
+                    <div class="pairing-row">
+                        <span class="pair-token token-paired">💰+🙏<br>= 3</span>
+                        <span class="pair-token token-paired">💰+🙏<br>= 3</span>
+                        <span class="pair-token token-paired">💰+🙏<br>= 3</span>
+                        <span class="pair-token token-capital token-unpaired">💰<br>= 1</span>
+                        <span class="pair-token token-capital token-unpaired">💰<br>= 1</span>
+                    </div>
+                    <div style="margin-top: 20px; font-size: 1.3em;">
+                        <strong style="color: var(--terminal-cyan);">3 PAIRS × 3</strong> = 9 purge<br>
+                        + <strong style="color: var(--terminal-yellow);">2 UNPAIRED × 1</strong> = 2 purge<br>
+                        <div style="margin-top: 10px; color: var(--terminal-red); text-shadow: 0 0 10px var(--terminal-red);">
+                            = 11 TOTAL PURGE
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Why Balance Matters</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>PRIMARY</th>
+                            <th>SECONDARY</th>
+                            <th>PAIRS</th>
+                            <th>UNPAIRED</th>
+                            <th>TOTAL PURGE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>0</td>
+                            <td style="color: var(--terminal-green); font-weight: bold;">15 (100%)</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>2</td>
+                            <td>14 (93%)</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>13 (87%)</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>6</td>
+                            <td>12 (80%)</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>10</td>
+                            <td style="color: var(--terminal-red);">10 (67%)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="key-rule">
+                    🎯 CRITICAL: Balanced splits (5+5) generate 50% MORE purge than imbalanced splits (10+0)! Build balanced generators to win faster.
+                </div>
             </div>
         </div>
 
@@ -1275,6 +1439,10 @@
                     <li>Decide who goes first (coin flip, etc.)</li>
                     <li>First player begins!</li>
                 </ol>
+
+                <div class="alert alert-info">
+                    <strong>Track Your Life Total:</strong> You start with 60 cards. As your opponent purges cards, subtract from 60 to track your remaining "life."
+                </div>
             </div>
         </div>
 
@@ -1319,6 +1487,14 @@
                 <ol>
                     <li>Remove 1 Disruption from each of your cards</li>
                     <li>Resolve end-of-turn effects (if any)</li>
+                    <li><strong style="color: var(--terminal-red);">CALCULATE PURGE:</strong>
+                        <ul>
+                            <li>Count Primary + Secondary objectives generated</li>
+                            <li>Form pairs: MIN(Primary, Secondary)</li>
+                            <li>Purge = (Pairs × 3) + (Unpaired × 1)</li>
+                            <li>Opponent purges that many cards from deck</li>
+                        </ul>
+                    </li>
                     <li>Discard down to 7 cards (if over hand limit)</li>
                 </ol>
             </div>
@@ -1393,6 +1569,27 @@
 
                 <p><strong>Example:</strong> To deploy an L2 Takahashi Agent, you need 2 Takahashi cards already in play.</p>
                 <p>Start with L0 cards, then build up to deploy your powerful high-Loyalty cards!</p>
+
+                <h3>Infrastructure Resources</h3>
+                <p>Some cards require <strong>Infrastructure Resources</strong> to deploy efficiently. These work as thresholds (like Loyalty checks):</p>
+
+                <ul>
+                    <li><strong>Assets provide resources</strong> to your board (matching their objective type)</li>
+                    <li><strong>Cards require resources</strong> (listed as Infra 1-6 on the card)</li>
+                    <li><strong>Missing resources apply +1 Bandwidth penalty per missing resource</strong></li>
+                    <li><strong>Strict matching required:</strong> Capital resources for Capital requirements, Chaos for Chaos, etc.</li>
+                </ul>
+
+                <div class="alert alert-warning">
+                    <strong>EXAMPLE:</strong> A card requires "Infra: Capital 3" (needs 3 Capital resources). You control 2 Assets providing Capital. You're missing 1 Capital resource, so you pay +1 extra Bandwidth to deploy this card.
+                </div>
+
+                <p><strong>Key Points:</strong></p>
+                <ul>
+                    <li>Missing resources <em>don't prevent</em> deployment—they just cost extra Bandwidth</li>
+                    <li>Most objective-generating Assets provide matching resources</li>
+                    <li>Building infrastructure early makes later deployments cheaper</li>
+                </ul>
             </div>
         </div>
 
@@ -1425,7 +1622,7 @@
         </div>
 
         <h3>Assets</h3>
-        <p>Your holdings and infrastructure. They have Security Level and abilities that often generate Objective points. Assets can't make Plays, but they can be targeted.</p>
+        <p>Your holdings and infrastructure. They have Security Level and abilities that often <strong>generate Objective points</strong> (which creates purge!). Assets can't make Plays, but they can be targeted.</p>
         <div class="card-display">
             <div class="card-header">▸ CORPORATE HEADQUARTERS</div>
             <div style="opacity: 0.7; font-size: 0.9em; margin-bottom: 10px;">Type: Asset, Holding, Corporate</div>
@@ -1437,6 +1634,10 @@
             <div class="card-flavor">
                 "The tower never sleeps. Neither do we."
             </div>
+        </div>
+
+        <div class="alert alert-warning">
+            <strong>Assets are your ENGINE!</strong> They generate objective points, which create purge. Protect them to keep your purge pressure high!
         </div>
 
         <h3>Upgrades</h3>
@@ -1771,52 +1972,14 @@ IMPORTANT: Backdoor marker removes ALL targeting restrictions!
         </div>
 
         <div class="hacker-divider">
-            >>> TRIGGERED EFFECTS DATABASE ACCESSED... ABILITY SPECIFICATIONS LOADED <<<
+            >>> DECK EXHAUSTION PROTOCOLS... RESHUFFLE SYSTEMS ACTIVE <<<
         </div>
 
-        <!-- Triggered Effects -->
-        <h2 id="triggers">TRIGGERED EFFECTS</h2>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>EFFECT</th>
-                    <th>WHEN IT TRIGGERS</th>
-                    <th>WHO HAS IT</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="color: var(--terminal-red);">Crash</td>
-                    <td>You win an Override Play</td>
-                    <td>Agents, Upgrades</td>
-                </tr>
-                <tr>
-                    <td style="color: var(--terminal-yellow);">Gridshock</td>
-                    <td>You defend a failed Override Play</td>
-                    <td>Assets, Upgrades</td>
-                </tr>
-                <tr>
-                    <td style="color: var(--terminal-cyan);">Backdoor</td>
-                    <td>You win Intrusion vs. target with Backdoor marker</td>
-                    <td>Agents, Upgrades</td>
-                </tr>
-                <tr>
-                    <td style="color: var(--terminal-purple);">Compromised</td>
-                    <td>You defend a failed Intrusion Play</td>
-                    <td>Agents, Assets, Upgrades</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="hacker-divider">
-            >>> KEYWORD DEFINITIONS... LOADING STATUS EFFECTS <<<
-        </div>
-
-        <!-- Keywords -->
-        <h2 id="keywords">KEYWORDS</h2>
+        <!-- Deck Exhaustion -->
+        <h2 id="exhaustion">DECK EXHAUSTION</h2>
         <div class="terminal-window">
             <div class="terminal-header">
-                <span class="terminal-title">keywords.db</span>
+                <span class="terminal-title">reshuffle.exe</span>
                 <div class="terminal-buttons">
                     <div class="terminal-btn btn-close"></div>
                     <div class="terminal-btn btn-min"></div>
@@ -1824,14 +1987,39 @@ IMPORTANT: Backdoor marker removes ALL targeting restrictions!
                 </div>
             </div>
             <div class="terminal-body">
-                <h3>Disrupted</h3>
-                <p>A Disrupted card can't commit or use abilities. Remove 1 Disruption during your End Phase.</p>
+                <h3>When Your Deck Runs Out</h3>
+                <p><strong>If you need to draw and your deck is empty:</strong></p>
+                <ol>
+                    <li>Shuffle your trash (discard pile) into a new deck</li>
+                    <li>Continue playing (NO purge penalty!)</li>
+                    <li>Draw the card you needed</li>
+                </ol>
 
-                <h3>Protected</h3>
-                <p>A Protected card can only be targeted by Intrusion Plays. (Unless it has a Backdoor marker.)</p>
+                <div class="alert alert-success">
+                    <strong>NO PURGE PENALTY!</strong> Reshuffling does NOT cost you any cards. Cards only leave the game via opponent's purge effect.
+                </div>
 
-                <h3>Commit</h3>
-                <p>Rotate a card sideways to use it for a Play, block, or activate a "Commit //" ability. Committed cards refresh (rotate upright) during your Start Phase.</p>
+                <h3>Loss Condition</h3>
+                <div class="alert alert-danger">
+                    <strong>You lose if you need to draw/shuffle but have 0 total cards (deck + trash combined).</strong>
+                </div>
+
+                <h3>Example Exhaustion Sequence</h3>
+                <div class="code-block">
+                    <div class="code-line">Turn 10: Deck hits 0 → Shuffle trash (15 cards) → Deck = 15</div>
+                    <div class="code-line">Turn 12: Deck hits 0 → Shuffle trash (8 cards) → Deck = 8</div>
+                    <div class="code-line">Turn 13: Deck hits 0 → Shuffle trash (2 cards) → Deck = 2</div>
+                    <div class="code-line">Turn 14: Deck hits 0 → Trash = 0 → YOU LOSE</div>
+                </div>
+
+                <h3>Tracking Your Life Total</h3>
+                <div style="margin: 20px 0;">
+                    <strong>Starting Cards:</strong> 60<br>
+                    <strong>Purged So Far:</strong> 35 (example)<br>
+                    <strong style="color: var(--terminal-yellow); font-size: 1.2em;">REMAINING LIFE: 25 cards</strong>
+                </div>
+
+                <p>These 25 cards are distributed across deck, hand, board, and trash. When all zones = 0, you lose!</p>
             </div>
         </div>
 
@@ -1881,23 +2069,6 @@ IMPORTANT: Backdoor marker removes ALL targeting restrictions!
         </div>
 
         <div class="hacker-divider">
-            >>> DECK EXHAUSTION PROTOCOLS... FAILSAFE SYSTEMS ACTIVE <<<
-        </div>
-
-        <!-- Deck Exhaustion -->
-        <h2>DECK EXHAUSTION</h2>
-        <div class="alert alert-danger">
-            <strong>If you need to draw and your deck is empty:</strong>
-            <ol>
-                <li>Shuffle your trash (discard pile)</li>
-                <li>Remove the top 10 cards from the game (hidden)</li>
-                <li>The rest becomes your new deck</li>
-            </ol>
-            <br>
-            If you can't remove 10 cards and need to shuffle again, you lose the game.
-        </div>
-
-        <div class="hacker-divider">
             >>> VICTORY CONDITIONS... ENDGAME PROTOCOLS LOADED <<<
         </div>
 
@@ -1914,18 +2085,29 @@ IMPORTANT: Backdoor marker removes ALL targeting restrictions!
             </div>
             <div class="terminal-body">
                 <div style="text-align: center; margin: 20px 0;">
-                    <div style="font-size: 1.5em; color: var(--terminal-yellow); text-shadow: 0 0 10px var(--terminal-yellow);">
-                        FIRST TO 12 POINTS WINS!
+                    <div style="font-size: 1.5em; color: var(--terminal-red); text-shadow: 0 0 10px var(--terminal-red);">
+                        DEPLETE OPPONENT TO ZERO!
                     </div>
                 </div>
 
                 <div style="margin: 20px 0;">
                     <strong>Example Progress:</strong>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 83%;"></div>
-                        <div class="progress-text">10/12 (8 Capital, 2 Chaos)</div>
+                        <div class="progress-fill" style="width: 25%;"></div>
+                        <div class="progress-text">15/60 cards remaining (45 purged)</div>
                     </div>
+                    <p style="margin-top: 10px; text-align: center; color: var(--terminal-yellow);">
+                        Opponent is at 25% life! Keep the purge pressure high!
+                    </p>
                 </div>
+
+                <h3>How to Win Faster</h3>
+                <ul>
+                    <li>Deploy balanced objective generators (5 Capital + 5 Devotion is optimal)</li>
+                    <li>Protect your Assets (they generate objectives → purge)</li>
+                    <li>Destroy opponent's Assets (reduce their purge output)</li>
+                    <li>Calculate their life total: 60 - (your total purge) = their remaining cards</li>
+                </ul>
             </div>
         </div>
 
@@ -1947,10 +2129,10 @@ IMPORTANT: Backdoor marker removes ALL targeting restrictions!
             <div class="terminal-body">
                 <ol>
                     <li><strong style="color: var(--terminal-cyan);">Start with L0 cards</strong> to build your board</li>
-                    <li><strong style="color: var(--terminal-cyan);">Protect your Assets</strong>—they generate Objective points</li>
-                    <li><strong style="color: var(--terminal-cyan);">Use Intrusion</strong> to target uncommitted/Protected cards</li>
-                    <li><strong style="color: var(--terminal-cyan);">Watch your hand</strong>—discards matter for paying costs</li>
-                    <li><strong style="color: var(--terminal-cyan);">Read your faction's Objectives</strong>—build toward them!</li>
+                    <li><strong style="color: var(--terminal-cyan);">Protect your Assets</strong>—they generate objectives → purge!</li>
+                    <li><strong style="color: var(--terminal-cyan);">Build balanced generators</strong>—5+5 is 50% more purge than 10+0</li>
+                    <li><strong style="color: var(--terminal-cyan);">Track opponent's life</strong>—60 minus your total purge = their cards left</li>
+                    <li><strong style="color: var(--terminal-cyan);">Use Intrusion</strong> to target uncommitted/Protected cards and destroy their Assets</li>
                 </ol>
             </div>
         </div>
@@ -1993,9 +2175,9 @@ IMPORTANT: Backdoor marker removes ALL targeting restrictions!
         <!-- Footer -->
         <div class="footer">
             <div style="font-size: 0.8em; opacity: 0.6;">
-                >>> SYSTEM.VERSION: BLEEDING_EDGE_v2.0<br>
+                >>> SYSTEM.VERSION: BLEEDING_EDGE_v3.0 [DECK-OUT]<br>
                 >>> NEURAL_INTERFACE: ACTIVE<br>
-                >>> UPLINK_STATUS: CONNECTED<br>
+                >>> PURGE_SYSTEM: ONLINE<br>
                 >>> © 2077 BLEEDING EDGE TACTICAL SYSTEMS
             </div>
         </div>
